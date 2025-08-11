@@ -25,3 +25,15 @@ Flask-App/
 │── .env # API key storage (ignored by Git)
 │── .gitignore # Ignore sensitive & unnecessary files
 │── README.md # Project documentation
+
+## 🚀 Running the Application
+bash
+Copy
+Edit
+python app.py
+The app will run at:
+
+cpp
+Copy
+Edit
+http://127.0.0.1:5000

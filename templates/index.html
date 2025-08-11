@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>💬AI Chat</h1>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="question" placeholder="Type your question here...">
+            <button onclick="askQuestion()">Ask</button>
+        </div>
+    </div>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById("question").value.trim();
+            if (!question) return;
+
+            const chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<div class="message user"><strong>You:</strong> ${question}</div>`;
+            document.getElementById("question").value = "";
+
+            try {
+                const res = await fetch("/ask", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question })
+                });
+
+                const data = await res.json();
+                if (data.answer) {
+                    chatBox.innerHTML += `<div class="message bot"><strong>AI chatbot:</strong> ${data.answer}</div>`;
+                } else {
+                    chatBox.innerHTML += `<div class="message bot error"><strong>Error:</strong> ${data.error}</div>`;
+                }
+            } catch (err) {
+                chatBox.innerHTML += `<div class="message bot error"><strong>Error:</strong> ${err.message}</div>`;
+            }
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# 🌿 Gemini AI Flask Web App
+# 🌿AI Flask Web App
 
 A sleek **Flask web application** powered by **Google's Gemini AI** (`gemini-1.5-flash` model) with a modern **green & black theme** interface.  
 Users can ask questions, and the AI will respond instantly, all within a responsive, stylish UI.
